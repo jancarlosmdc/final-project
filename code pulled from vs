@@ -1,0 +1,383 @@
+import random
+
+#drivers, teams, and races of the 2020 season
+drivers = ['Lewis Hamilton', 'Valtteri Bottas', 'Max Verstappen', 'Alexander Albon', 'Lando Norris', 'Carlos Sainz', 'Daniel Ricciardo', 'Esteban Ocon', 'Sebastian Vettel', 'Charles Leclerc', 'Pierre Gasly', 'Daniil Kvyat', 'Kimi Raikkonen', 'Antonio Giovinazzi', 'Kevin Magnussen', 'Romain Grosjean', 'George Russell', 'Nicholas Latifi']
+teams = ['Mercedes', 'Red Bull Racing', 'McLaren', 'Racing Point', 'Renault', 'Ferrari', 'AlphaTauri', 'Alfa Romeo Racing', 'Haas', 'Williams']
+races = ['Austrian Grand Prix', 'Styrian Grand Prix', 'Hungarian Grand Prix', 'British Grand Prix', '70th Anniversary Grand Prix', 'Spanish Grand Prix', 'Belgian Grand Prix', 'Italian Grand Prix', 'Tuscan Grand Prix', 'Russian Grand Prix', 'Eifel Grand Prix', 'Portuguese Grand Prix', 'Emilia Romagna Grand Prix', 'Turkish Grand Prix', 'Bahrain Grand Prix', 'Sakhir Grand Prix', 'Abu Dhabi Grand Prix']
+
+sim = input('''
+  Welcome to the 2020 F1 season simulator!
+
+Would you like to simulate an entire F1 or would you like the  
+simulated  results for the already finished real 2020 season?
+
+Press 1 for Randomly generated Simulation
+Press 2 for Real world results 
+press 3 to exit
+
+            ''')
+
+def simulate_race(drivers):
+    shuffled_drivers = drivers.copy()
+    random.shuffle(shuffled_drivers)
+    return shuffled_drivers
+if sim == "1":
+
+    results = []
+    for race in races:
+        race_results = simulate_race(drivers)
+        results.append({race: race_results})
+
+    
+    for result in results:
+        race_name = list(result.keys())[0]
+        print(race_name)
+        print('-------------------------')
+        for i, driver in enumerate(result[race_name]):
+            print(f'{i+1}. {driver}')
+        print()
+
+    
+    season_results = {driver: 0 for driver in drivers}
+    for i in range(10):  
+        race_results = simulate_race(drivers)
+        for j, driver in enumerate(race_results):
+            points = 25 - j if j < 10 else 0 
+            season_results[driver] += points
+
+    # Display 
+    sorted_results = sorted(season_results.items(), key=lambda x: x[1], reverse=True)
+    print('Simulated Season Results')
+    print('-------------------------')
+    for i, result in enumerate(sorted_results):
+        driver, points = result
+        print(f'{i+1}. {driver}: {points} points')
+
+elif sim == "2":
+    print('''
+    Race 1: Austrian Grand Prix
+1. Valtteri Bottas
+2. Charles Leclerc
+3. Lando Norris
+4. Lewis Hamilton
+5. Carlos Sainz Jr.
+6. Sergio Perez
+7. Pierre Gasly
+8. Esteban Ocon
+9. Antonio Giovinazzi
+10. Sebastian Vettel
+11. Nicholas Latifi
+12. Daniil Kvyat
+Retired: Alexander Albon, Kimi Raikkonen, Kevin Magnussen, Romain Grosjean, George Russell, Max Verstappen, Daniel Ricciardo
+
+Race 2: Styrian Grand Prix
+1. Lewis Hamilton
+2. Valtteri Bottas
+3. Max Verstappen
+4. Alexander Albon
+5. Lando Norris
+6. Sergio Perez
+7. Lance Stroll
+8. Daniel Ricciardo
+9. Carlos Sainz Jr.
+10. Daniil Kvyat
+11. Kimi Raikkonen
+12. Kevin Magnussen
+13. Antonio Giovinazzi
+Retired: Charles Leclerc, Esteban Ocon, George Russell, Romain Grosjean, Pierre Gasly, Nicholas Latifi, Sebastian Vettel
+
+Race 3: Hungarian Grand Prix
+1. Lewis Hamilton
+2. Max Verstappen
+3. Valtteri Bottas
+4. Lance Stroll
+5. Alexander Albon
+6. Sebastian Vettel
+7. Sergio Perez
+8. Daniel Ricciardo
+9. Carlos Sainz Jr.
+10. Kevin Magnussen
+11. Charles Leclerc
+12. Daniil Kvyat
+13. Lando Norris
+14. Esteban Ocon
+15. Romain Grosjean
+Retired: Antonio Giovinazzi, Kimi Raikkonen, George Russell, Nicholas Latifi, Pierre Gasly
+
+Race 4: British Grand Prix
+1. Lewis Hamilton
+2. Max Verstappen
+3. Charles Leclerc
+4. Daniel Ricciardo
+5. Lando Norris
+6. Esteban Ocon
+7. Pierre Gasly
+8. Alexander Albon
+9. Lance Stroll
+10. Sebastian Vettel
+11. Valtteri Bottas
+12. George Russell
+13. Carlos Sainz Jr.
+14. Antonio Giovinazzi
+15. Nicholas Latifi
+Retired: Kevin Magnussen, Romain Grosjean, Kimi Raikkonen, Sergio Perez, Daniil Kvyat
+
+Race 5: 70th Anniversary Grand Prix
+1. Max Verstappen
+2. Lewis Hamilton
+3. Valtteri Bottas
+4. Charles Leclerc
+5. Alexander Albon
+6. Lance Stroll
+7. Nico Hulkenberg
+8. Esteban Ocon
+9. Lando Norris
+10. Daniil Kvyat
+11. Pierre Gasly
+12. Sebastian Vettel
+13. George Russell
+14. Antonio Giovinazzi
+15. Kimi Raikkonen
+Retired: Kevin Magnussen, Romain Grosjean, Carlos Sainz Jr., Daniel Ricciardo, Sergio Perez, Nicholas Latifi
+
+Race 6: Spanish Grand Prix
+1. Lewis Hamilton
+2. Max Verstappen
+3. Valtteri Bottas
+4. Lance Stroll
+5. Sergio Perez
+6. Carlos Sainz Jr.
+7. Sebastian Vettel
+8. Alexander Albon
+9. Pierre Gasly
+10. Lando Norris
+11. Daniel Ricciardo
+12. Daniil Kvyat
+13. Esteban Ocon
+14. Kimi Raikkonen
+15. Kevin Magnussen
+Retired: Antonio Giovinazzi, Romain Grosjean, Nicholas Latifi, Charles Leclerc, George Russell
+
+
+    
+Race 7: Belgian Grand Prix
+1. Lewis Hamilton
+2. Valtteri Bottas
+3. Max Verstappen
+4. Daniel Ricciardo
+5. Esteban Ocon
+6. Alexander Albon
+7. Lando Norris
+8. Pierre Gasly
+9. Lance Stroll
+10. Sergio Perez
+11. Daniil Kvyat
+12. Kimi Raikkonen
+13. Sebastian Vettel
+14. George Russell
+15. Nicholas Latifi
+Retired: Charles Leclerc, Romain Grosjean, Kevin Magnussen, Antonio Giovinazzi
+
+Race 8: Italian Grand Prix
+1. Pierre Gasly
+2. Carlos Sainz Jr.
+3. Lance Stroll
+4. Lando Norris
+5. Valtteri Bottas
+6. Daniel Ricciardo
+7. Lewis Hamilton
+8. Esteban Ocon
+9. Daniil Kvyat
+10. Sergio Perez
+11. Nicholas Latifi
+12. Romain Grosjean
+13. Kimi Raikkonen
+Retired: Max Verstappen, Kevin Magnussen, Antonio Giovinazzi, George Russell, Alexander Albon, Sebastian Vettel, Charles Leclerc
+
+Race 9: Tuscan Grand Prix
+1. Lewis Hamilton
+2. Valtteri Bottas
+3. Alexander Albon
+4. Daniel Ricciardo
+5. Sergio Perez
+6. Lando Norris
+7. Daniil Kvyat
+8. Charles Leclerc
+9. Kimi Raikkonen
+10. Sebastian Vettel
+11. George Russell
+12. Romain Grosjean
+Retired: Lance Stroll, Esteban Ocon, Max Verstappen, Pierre Gasly, Antonio Giovinazzi, Nicholas Latifi, Carlos Sainz Jr.
+
+Race 10: Russian Grand Prix
+1. Valtteri Bottas
+2. Max Verstappen
+3. Lewis Hamilton
+4. Sergio Perez
+5. Daniel Ricciardo
+6. Charles Leclerc
+7. Esteban Ocon
+8. Daniil Kvyat
+9. Pierre Gasly
+10. Alexander Albon
+11. Antonio Giovinazzi
+12. Kevin Magnussen
+13. Sebastian Vettel
+14. Kimi Raikkonen
+15. George Russell
+Retired: Lando Norris, Lance Stroll, Romain Grosjean, Nicholas Latifi, Carlos Sainz Jr.
+
+Race 11: Eifel Grand Prix
+1. Lewis Hamilton
+2. Max Verstappen
+3. Daniel Ricciardo
+4. Sergio Perez
+5. Carlos Sainz Jr.
+6. Pierre Gasly
+7. Charles Leclerc
+8. Nico Hulkenberg
+9. Romain Grosjean
+10. Antonio Giovinazzi
+11. Sebastian Vettel
+12. Kimi Raikkonen
+13. George Russell
+14. Valtteri Bottas
+Retired: Alexander Albon, Lando Norris, Kevin Magnussen, Esteban Ocon, Daniil Kvyat, Nicholas Latifi
+
+Race 12: Emilia Romagna Grand Prix
+1. Lewis Hamilton
+2. Valtteri Bottas
+3. Daniel Ricciardo
+4. Daniil Kvyat
+5. Charles Leclerc
+6. Sergio Perez
+7. Carlos Sainz Jr.
+8. Lando Norris
+9. Kimi Raikkonen
+10. Alexander Albon
+Retired: Max Verstappen, Lance Stroll, Esteban Ocon, Pierre Gasly, Sebastian Vettel, Antonio Giovinazzi, George Russell, Nicholas Latifi, Kevin Magnussen, Romain Grosjean
+
+Race 13: Turkish Grand Prix
+1. Lewis Hamilton
+2. Sergio Perez
+3. Sebastian Vettel
+4. Charles Leclerc
+5. Carlos Sainz Jr.
+6. Max Verstappen
+7. Alex Albon
+8. Lando Norris
+9. Lance Stroll
+10. Daniel Ricciardo
+11. Valtteri Bottas
+12. Esteban Ocon
+13. Daniil Kvyat
+14. Pierre Gasly
+15. Antonio Giovinazzi
+Retired: Kevin Magnussen, Kimi Raikkonen, Nicholas Latifi, George Russell, Romain Grosjean
+
+Race 14: Bahrain Grand Prix
+1. Lewis Hamilton
+2. Max Verstappen
+3. Alexander Albon
+4. Lando Norris
+5. Carlos Sainz Jr.
+6. Pierre Gasly
+7. Daniel Ricciardo
+8. Valtteri Bottas
+9. Esteban Ocon
+10. Charles Leclerc
+11. Daniil Kvyat
+12. Sergio Perez
+13. Nicholas Latifi
+14. Kimi Raikkonen
+15. George Russell
+Retired: Kevin Magnussen, Lance Stroll, Sebastian Vettel, Antonio Giovinazzi, Romain Grosjean
+
+Race 15: Sakhir Grand Prix
+1. Sergio Perez
+2. Esteban Ocon
+3. Lance Stroll
+4. Carlos Sainz Jr.
+5. Daniel Ricciardo
+6. Valtteri Bottas
+7. George Russell
+8. Lando Norris
+9. Daniil Kvyat
+10. Charles Leclerc
+11. Kimi Raikkonen
+12. Antonio Giovinazzi
+13. Jack Aitken
+Retired: Max Verstappen, Kevin Magnussen, Pietro Fittipaldi, Alex Albon, Nicholas Latifi, Lewis Hamilton
+
+Race 16: Abu Dhabi Grand Prix
+1. Max Verstappen
+2. Valtteri Bottas
+3. Lewis Hamilton
+4. Alex Albon
+5. Lando Norris
+6. Carlos Sainz Jr.
+7. Daniel Ricciardo
+8. Sergio Perez
+9. Pierre Gasly
+10. Esteban Ocon
+11. Charles Leclerc
+12. Daniil Kvyat
+13. Kimi Raikkonen
+14. Sebastian Vettel
+15. George Russell
+Retired: Antonio Giovinazzi, Kevin Magnussen, Jack Aitken, Nicholas Latifi, Lance Stroll, Fernando Alonso
+
+    
+    Final Championship Standings:
+    1. Lewis Hamilton - 347 points
+    2. Valtteri Bottas - 223 points
+    3. Max Verstappen - 214 points
+    4. Sergio Perez - 125 points
+    5. Daniel Ricciardo - 119 points
+    6. Carlos Sainz Jr. - 105 points
+    7. Alexander Albon - 105 points
+    8. Charles Leclerc - 98 points
+    9. Lando Norris - 97 points
+    10. Pierre Gasly - 75 points
+    11. Lance Stroll - 75 points
+    12. Esteban Ocon - 62 points
+    13. Sebastian Vettel - 33 points
+    14. Daniil Kvyat - 32 points
+    15. Fernando Alonso - 26 points
+    16. Nico Hulkenberg - 10 points
+    17. Kimi Raikkonen - 4 points
+    18. Antonio Giovinazzi - 4 points
+    19. Kevin Magnussen - 1 point
+    20. Romain Grosjean - 0 points
+    21. George Russell - 0 points
+    22. Nicholas Latifi - 0 points
+
+    
+    
+    
+    
+    ''')
+    
+elif sim == "3":
+    print ("Have a nice day!")
+    pass
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
